@@ -2,9 +2,9 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
-# Create your models here.
+
 class Post(models.Model):
-    author = models.CharField(max_length=128)
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     text = models.TextField()
     title = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -26,7 +26,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey('blog.Post', related_name='comments')
+    post = models.ForeignKey('blog_app.Post', related_name='comments', on_delete=models.CASCADE)
     author = models.CharField(max_length=128)
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

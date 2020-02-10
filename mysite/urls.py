@@ -15,12 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
+from django.conf import settings
 
-from django.contrib.auth import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('', include(blog_app.urls)),
+    path('', include('blog_app.urls')),
     path('admin/', admin.site.urls),
-    re_path(r'accounts/login/$', views.login, name='login'),
-    re_path(r'accounts/logout/$', views.logout, name='logout', kwargs={'next_page': '/'}),
+    re_path('^accounts/login/$', auth_views.LoginView, 
+            {'template_name': "registration/login.html"},
+            name='login'),
+    re_path(r'^accounts/logout/$', auth_views.LogoutView,
+            {'next_page': settings.LOGIN_REDIRECT_URL}, 
+            name='logout'),
 ]

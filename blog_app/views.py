@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from blog.models import Post, Comment
+from blog_app.models import Post, Comment
 from django.utils import timezone
 from blog_app.forms import PostForm, CommentForm
 
