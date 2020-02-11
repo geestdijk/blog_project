@@ -22,10 +22,10 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('', include('blog_app.urls')),
     path('admin/', admin.site.urls),
-    re_path('^accounts/login/$', auth_views.LoginView, 
+    re_path('^accounts/login/$', auth_views.LoginView.as_view(), 
             {'template_name': "registration/login.html"},
             name='login'),
-    re_path(r'^accounts/logout/$', auth_views.LogoutView,
+    re_path(r'^accounts/logout/$', auth_views.LogoutView.as_view(),
             {'next_page': settings.LOGIN_REDIRECT_URL}, 
             name='logout'),
 ]
